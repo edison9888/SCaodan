@@ -8,16 +8,33 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.tabbarController = [[UITabBarController alloc] init];
     // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    SNewsViewController * newsViewController = [[SNewsViewController alloc] init];
+    UINavigationController * newsNavigation = [[UINavigationController alloc] initWithRootViewController:newsViewController];
+    
+    UIViewController * hotViewController = [[UIViewController alloc] init];
+    hotViewController.title = @"最热";
+    UINavigationController * hotNavigation = [[UINavigationController alloc] initWithRootViewController:hotViewController];
+    
+    UIViewController * badViewController = [[UIViewController alloc] init];
+    badViewController.title = @"最衰";
+    UINavigationController * badNavigation = [[UINavigationController alloc] initWithRootViewController:badViewController];
+    
+    UIViewController * randomViewController = [[UIViewController alloc] init];
+    randomViewController.title = @"随机";
+    UINavigationController * randomNavigation = [[UINavigationController alloc] initWithRootViewController:randomViewController];
+    
+    self.tabbarController.viewControllers = @[newsNavigation,hotNavigation,badNavigation,randomNavigation];
+    
+    
+    self.window.rootViewController = self.tabbarController;
     [self.window makeKeyAndVisible];
     return YES;
 }

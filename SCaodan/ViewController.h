@@ -6,8 +6,8 @@
 //  Copyright (c) 2012年 sun. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SNewsModel.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

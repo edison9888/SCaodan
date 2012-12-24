@@ -1,0 +1,317 @@
+/* 
+  index.html
+  SCaodan
+
+  Created by SunJiangting on 12-11-15.
+  Copyright (c) 2012年 sun. All rights reserved.
+*/
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>草蛋网_一起来分享我们的草蛋日子吧！What a fucking day!</title>
+        <meta name="description" content="今天,你草蛋了吗？草蛋网是一个独特有趣的信息分享网站。在这里我们可以分享生活中遭遇的尴尬、荒诞和不顺心，帮助我们从最草蛋的日子里寻找生活乐趣。赶快一起来分享我们的草蛋日子吧！草蛋网陪你一起度过草蛋的一天，囧！" />
+        <link rel="shortcut icon" href="http://www.caoegg.cn/favicon.ico" />
+        <script language="javascript" src="/scripts/jquery-1.3.1.min.js"></script>
+        <script language="javascript" src="/scripts/main.js"></script>
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function() {
+                              var $backToTopEle = $('<div class="back_to_top"></div>').appendTo($("body")).click(function() {
+                                                                                                                 $("html, body").animate({ scrollTop: 0 }, 120);
+                                                                                                                 }), $backToTopFun = function() {
+                              var st = $(document).scrollTop(), winh = $(window).height();
+                              (st > 0)? $backToTopEle.fadeIn(): $backToTopEle.fadeOut();
+                              //IE6下的定位
+                              if (!window.XMLHttpRequest) {
+                              $backToTopEle.css("top", st + winh - 166);
+                              }
+                              };
+                              $(window).bind("scroll", $backToTopFun);
+                              $(function() { $backToTopFun(); });
+                              
+                              
+                              //FckEX.com
+                              });
+            
+            //投票
+            function vote_picture_yes(id, cm, re) {
+                //$('#voteyes'+id).css('display','none');
+                $.post("/vote_yes.php",{"id":id, "cm":cm, "act":"ooxx"},function(data) {
+                       $('#voteyes'+id+re).css({color:"#aaa"}).html('OO (' + data + ')');
+                       });
+            }
+            function vote_picture_no(id, cm, re) {
+                //$('#voteno'+id).css('display','none');
+                $.post("/vote_no.php",{"id":id,"cm":cm, "act":"ooxx"},function(data) {
+                       $('#voteno'+id+re).css({color:"#aaa"}).html('XX (' + data + ')');
+                       });
+            }
+            
+            
+            function zone_fixed()
+            {
+                var top=$(document).scrollTop();
+                if(($.browser.msie==true)&&($.browser.version==6.0)) {
+                    if(top>1800)$(".fixed_box").css({position:"absolute",top:top-1800});
+                } else {
+                    if(top>1800)$(".fixed_box").css({position:"fixed",top:"-"&top+"px"});
+                }
+                if(top<=1800) $(".fixed_box").css({position:"static",top:0}).fadeIn();
+            }
+            $(function() {
+              window.onscroll=zone_fixed;
+              window.onresize=zone_fixed;
+              });
+            
+            </script>
+        <link rel="stylesheet" type="text/css" href="/stylesheet/main.css" />
+    </head>
+    
+    <body>
+        <div id="tips">
+            <div id="tips_w">
+                <div id="tips_t" class="tips_t"><span id="message_text"></span><span id="message_dock" class="message_dock"></span></div>
+            </div>
+        </div><a name="top"></a>
+        <div id="header_wrap">
+            <div id="header">
+                <a id="logo" href="/" title="草蛋网 - 首页">草蛋网 What a fucking day!</a>
+                <div id="login_state">
+                </div>
+                <div id="search">
+                    <form action="/search">
+                        <input type="text" name="q" id="search_q" value="按关键字/昵称/编号搜索" /><input type="submit" value="" id="search_submit" />
+                    </form>
+                </div>
+            </div>
+        </div><div id="wrap">
+            <div id="wrap_left">
+                <div id="menu">
+                    <div id="menu_lb"></div>
+                    <div id="menu_cen">
+                        <div id="menu_cen_left">
+                            <ul>
+                                <li><a href="/" class="now">最 新</a></li>
+                                <li><a href="/flop/today">最 衰</a></li>
+                                <li><a href="/top/today">最 该</a></li>
+                                <li><a href="/random">随 机</a></li>
+                                <li><a href="/comment/today">评 论</a></li>
+                                <li><a href="/ooxx">OOXX</a></li>
+                            </ul>
+                        </div>
+                        <div id="menu_cen_right"><span>发布你的草蛋事儿</span></div>
+                    </div>
+                    <div id="menu_rb"></div>
+                </div>
+                <div id="wrap_info">
+                    <div id="pub_wrap">
+                        <form>
+                            <input type="hidden" name="uid" value="" />
+                            <ul>
+                                <li class="big">提交你的 What a fucking day!</li>
+                            </ul>
+                            <div id="nickname_box">昵称:
+                                <input type="text" name="nickname" id="input_nickname" size="25"  style="border:1px solid #578CCA; height:20px" />
+                            </div>
+                            <div id="sex_box">性别: <select name="sex" id="input_sex" style="border:1px solid #578CCA;"><option value="male">男</option><option value="female">女</option></select></div>
+                            <div id="cat_box">分类: <select name="cat" id="input_cat" style="border:1px solid #578CCA;"><option value="">请选择</option><option value="1">爱情</option><option value="2">钱</option><option value="3">工作</option><option value="4">家庭</option><option value="5">学校</option><option value="6">性</option><option value="7">小孩</option><option value="8">健康</option><option value="9">杂七杂八</option></select></div>
+                            <div id="count_box">还可以输入<span>150</span>字</div>
+                            <div id="c_box"><textarea name="content" id="input_content" onkeyup="cut(this);" style="border:1px solid #578CCA; width:625px; height:90px; padding:5px;" class="input_content"></textarea></div>
+                            <div id="tag_box">标签: <input type="text" name="tags" id="input_tags" size="45"  style="border:1px solid #578CCA; height:20px" />（每个草蛋最多3个标签，用空格分隔）</div>
+                            <div id="submit_box"><span style="float:left" id="sender_email_zone"><label id="sender_email_link" style="cursor:pointer"><input type="checkbox" />审核通过后请发Email告诉我</label></span><input type="button" id="btn_pub" value="提 交" /></div>
+                            <div class="clear"></div>
+                        </form>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141628"><span>刚刚上课，前头一妹纸回头看到我的手机跟我说：呀，你的手机也是xxx，跟我的一样，我的是黑色的！ 我说：是啊好巧啊！我的这个。。。额。。。是白色的 缘分啊！ 既然这么巧 就留个手机号吧！（我同学一口水喷出来） What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141628">#141628</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141628"><a href="javascript:" onclick="voteyes('141628','3');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(3)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141628"><a href="javascript:" onclick="voteno('141628','2');">你丫活该</a> <font color="#aaaaaa">(2)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋仔 - <a href="/category/5">学校</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141628"><a onclick="addtofav(141628)" style="cursor:pointer">+加入收藏</a></span><script>share(141628, "刚刚上课，前头一妹纸回头看到我的手机跟我说：呀，你的手机也是xxx，跟我的一样，我的是黑色的！ 我说：是啊好巧啊！我的这个。。。额。。。是白色的 缘分啊！ 既然这么巧 就留个手机号吧！（我同学一口水喷出来） What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div style="float:left;padding:0 10px 0 30px;">
+                        <div style='float:left;margin:10px 0 10px 130px;display:inline;width:360px;height:300px;'><script type="text/javascript">/*360*300，创建于2012-8-14*/ var cpro_id = 'u1023036';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script></div>
+                    </div>
+                    <div class="infobox">
+                        <div class="c"><a href="/view/141627"><span>你妹的，妹子今天坐公交车坐过站了，门口一个SB一样的男帅挡着我，靠……就是挤不过去，怎么会有这么傻的帅锅！！！ What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141627">#141627</a> 评论(2)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141627"><a href="javascript:" onclick="voteyes('141627','6');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(6)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141627"><a href="javascript:" onclick="voteno('141627','4');">你丫活该</a> <font color="#aaaaaa">(4)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋妹 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141627"><a onclick="addtofav(141627)" style="cursor:pointer">+加入收藏</a></span><script>share(141627, "你妹的，妹子今天坐公交车坐过站了，门口一个SB一样的男帅挡着我，靠……就是挤不过去，怎么会有这么傻的帅锅！！！ What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141626"><span>职场新人，开会遇到一个别公司经理，我没有名片，他递给我名片我看也没看就放起来了。。。然后问他你贵姓。。。他不可思议得看了看我，回答了一下，然后脸臭臭的走了。。。 What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141626">#141626</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141626"><a href="javascript:" onclick="voteyes('141626','3');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(3)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141626"><a href="javascript:" onclick="voteno('141626','3');">你丫活该</a> <font color="#aaaaaa">(3)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋仔 - <a href="/category/3">工作</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141626"><a onclick="addtofav(141626)" style="cursor:pointer">+加入收藏</a></span><script>share(141626, "职场新人，开会遇到一个别公司经理，我没有名片，他递给我名片我看也没看就放起来了。。。然后问他你贵姓。。。他不可思议得看了看我，回答了一下，然后脸臭臭的走了。。。 What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141625"><span>楼主妹纸一枚。今天跟老妈抱怨头发掉了好多，老妈很神秘地说，我现在一点都不怕掉头发。引起了楼主极大的兴趣啊，忙追问有什么秘方。老妈幽幽地说，因为发现商场的假发很漂亮啊。。。  What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141625">#141625</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141625"><a href="javascript:" onclick="voteyes('141625','1');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(1)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141625"><a href="javascript:" onclick="voteno('141625','0');">你丫活该</a> <font color="#aaaaaa">(0)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋妹 - <a href="/category/4">家庭</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141625"><a onclick="addtofav(141625)" style="cursor:pointer">+加入收藏</a></span><script>share(141625, "楼主妹纸一枚。今天跟老妈抱怨头发掉了好多，老妈很神秘地说，我现在一点都不怕掉头发。引起了楼主极大的兴趣啊，忙追问有什么秘方。老妈幽幽地说，因为发现商场的假发很漂亮啊。。。  What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141624"><span>发个热乎的。刚刚碰上我们系院长和个女学生逛only,碰上之后那个尴尬啊，问题是那女学生还和我认识。。。哎，合着现在学生也难逃老师魔爪了。那个院长五十了啊啊啊啊啊！！！！ What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141624">#141624</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141624"><a href="javascript:" onclick="voteyes('141624','5');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(5)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141624"><a href="javascript:" onclick="voteno('141624','1');">你丫活该</a> <font color="#aaaaaa">(1)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋妹 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141624"><a onclick="addtofav(141624)" style="cursor:pointer">+加入收藏</a></span><script>share(141624, "发个热乎的。刚刚碰上我们系院长和个女学生逛only,碰上之后那个尴尬啊，问题是那女学生还和我认识。。。哎，合着现在学生也难逃老师魔爪了。那个院长五十了啊啊啊啊啊！！！！ What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141623"><span>不知道我每次花钱都要找一张钱包里最旧的，算不算强迫症… What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141623">#141623</a> 评论(1)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141623"><a href="javascript:" onclick="voteyes('141623','1');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(1)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141623"><a href="javascript:" onclick="voteno('141623','2');">你丫活该</a> <font color="#aaaaaa">(2)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋仔 - <a href="/category/2">钱</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141623"><a onclick="addtofav(141623)" style="cursor:pointer">+加入收藏</a></span><script>share(141623, "不知道我每次花钱都要找一张钱包里最旧的，算不算强迫症… What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141622"><span>今天物流实训课，我们分组练习，还没到我们这组，就站在旁边玩，我看到门口有一种称货品的大的电子称，就站上去，发现重了好多，觉得可能是衣服穿厚了，就叫旁边的同学帮我把外衣提起来，果真轻了几斤，旁边一个天然呆的妹子也过来称，自己把自己的大衣提起来，还一脸无辜的说，天呐，我都把大衣提起来了还重这么多！！！周围同学憋到内伤。 What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141622">#141622</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141622"><a href="javascript:" onclick="voteyes('141622','2');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(2)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141622"><a href="javascript:" onclick="voteno('141622','0');">你丫活该</a> <font color="#aaaaaa">(0)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋仔 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141622"><a onclick="addtofav(141622)" style="cursor:pointer">+加入收藏</a></span><script>share(141622, "今天物流实训课，我们分组练习，还没到我们这组，就站在旁边玩，我看到门口有一种称货品的大的电子称，就站上去，发现重了好多，觉得可能是衣服穿厚了，就叫旁边的同学帮我把外衣提起来，果真轻了几斤，旁边一个天然呆的妹子也过来称，自己把自己的大衣提起来，还一脸无辜的说，天呐，我都把大衣提起来了还重这么多！！！周围同学憋到内伤。 What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox"><div class="c"><a href="/view/141621"><span>大家有木有这样的～打开可乐喝两口，晃了下，井喷了。拿嘴去堵，坚持着，终于从鼻子里喷出来了。  What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141621">#141621</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141621"><a href="javascript:" onclick="voteyes('141621','4');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(4)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141621"><a href="javascript:" onclick="voteno('141621','2');">你丫活该</a> <font color="#aaaaaa">(2)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋仔 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141621"><a onclick="addtofav(141621)" style="cursor:pointer">+加入收藏</a></span><script>share(141621, "大家有木有这样的～打开可乐喝两口，晃了下，井喷了。拿嘴去堵，坚持着，终于从鼻子里喷出来了。  What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141620"><span>晚上开车回家，老公撅着个鸡屁股嘴非要亲我。。恶心的。。我让他一边呆着去，好好开车，结果他还撅着嘴往我这边凑。最后我用绝招把他破了。。我的绝招是。用手指头扣扣鼻子，冲他撅着的嘴比划着弹了一下！丫立马转头老实开车去了。哈哈跟本女吊玩恶心，你还嫩哇老公！ What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141620">#141620</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141620"><a href="javascript:" onclick="voteyes('141620','1');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(1)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141620"><a href="javascript:" onclick="voteno('141620','2');">你丫活该</a> <font color="#aaaaaa">(2)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋仔 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141620"><a onclick="addtofav(141620)" style="cursor:pointer">+加入收藏</a></span><script>share(141620, "晚上开车回家，老公撅着个鸡屁股嘴非要亲我。。恶心的。。我让他一边呆着去，好好开车，结果他还撅着嘴往我这边凑。最后我用绝招把他破了。。我的绝招是。用手指头扣扣鼻子，冲他撅着的嘴比划着弹了一下！丫立马转头老实开车去了。哈哈跟本女吊玩恶心，你还嫩哇老公！ What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141619"><span>出国在外租房子住。舍友是外国人，有点邋遢。因为租得都是单间所以共用一个卫生间。洗漱工具都放在水槽旁边。=_=他的牙刷跟刷暴了一样，拿去洗马桶都嫌刷不干净的那种。有天男朋友来找我，看到了那把牙刷 以为是我刷头梳的，嫌脏就扔到垃圾桶里，桶里有我刚换下来的大姨妈巾。我惊呼不是我的！他就若无其事得给捡出来了。然后跟我说，不要跟他讲啊------不要讲-----讲+_+ What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141619">#141619</a> 评论(2)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141619"><a href="javascript:" onclick="voteyes('141619','2');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(2)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141619"><a href="javascript:" onclick="voteno('141619','1');">你丫活该</a> <font color="#aaaaaa">(1)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋妹 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141619"><a onclick="addtofav(141619)" style="cursor:pointer">+加入收藏</a></span><script>share(141619, "出国在外租房子住。舍友是外国人，有点邋遢。因为租得都是单间所以共用一个卫生间。洗漱工具都放在水槽旁边。=_=他的牙刷跟刷暴了一样，拿去洗马桶都嫌刷不干净的那种。有天男朋友来找我，看到了那把牙刷 以为是我刷头梳的，嫌脏就扔到垃圾桶里，桶里有我刚换下来的大姨妈巾。我惊呼不是我的！他就若无其事得给捡出来了。然后跟我说，不要跟他讲啊------不要讲-----讲+_+ What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141618"><span>发个我同学的吧！昨天爱疯4s 被偷了，自己的身份证被学校理发店小工借走办了一个电信专机专卡手机，欠了一千多话费后逃的无影无踪，现在报案了，苦逼的桑心逃课打工，刚才又被点名了，替她求人品吧！ What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141618">#141618</a> 评论(1)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141618"><a href="javascript:" onclick="voteyes('141618','3');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(3)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141618"><a href="javascript:" onclick="voteno('141618','1');">你丫活该</a> <font color="#aaaaaa">(1)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋妹 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141618"><a onclick="addtofav(141618)" style="cursor:pointer">+加入收藏</a></span><script>share(141618, "发个我同学的吧！昨天爱疯4s 被偷了，自己的身份证被学校理发店小工借走办了一个电信专机专卡手机，欠了一千多话费后逃的无影无踪，现在报案了，苦逼的桑心逃课打工，刚才又被点名了，替她求人品吧！ What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                                    <div class="infobox">
+                        <div class="c"><a href="/view/141617"><span>刚刚打电话给老公，让其晚上陪我剪头发，老公累了不愿意去，劝我说头发留着多好啊？为啥要剪呢？lz一听老公不爱去，顿时火起：头发太沉了…太沉…老公顿时笑爆了！你妹的，老娘是想说头发太长了！ What a fucking day!</span></a></div>
+                        <div class="date">
+                            <div id="dateleft"><a href="/view/141617">#141617</a> 评论(0)</div>
+                            <div id="dateright"><span class="voteyes" id="voteyes141617"><a href="javascript:" onclick="voteyes('141617','0');">我承认你这日子够草蛋</a> <font color="#aaaaaa">(0)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno141617"><a href="javascript:" onclick="voteno('141617','0');">你丫活该</a> <font color="#aaaaaa">(0)</font></span> <br />11 / 15 / 2012 匿名 - 草蛋妹 - <a href="/category/9">杂七杂八</a>            &nbsp;&nbsp;&nbsp;<span id="fav_141617"><a onclick="addtofav(141617)" style="cursor:pointer">+加入收藏</a></span><script>share(141617, "刚刚打电话给老公，让其晚上陪我剪头发，老公累了不愿意去，劝我说头发留着多好啊？为啥要剪呢？lz一听老公不爱去，顿时火起：头发太沉了…太沉…老公顿时笑爆了！你妹的，老娘是想说头发太长了！ What a fucking day!");</script>
+                            </div>
+                        </div>
+                    </div>                    </div>
+                <div id="paging">
+                    <span>前一页</span><span class=nowpage>1</span><a href=?page=2>2</a><a href=?page=3>3</a><a href=?page=4>4</a><a href=?page=5>5</a><a href=?page=6>6</a><a href=?page=7>7</a><a href=?page=8>8</a><a href=?page=9>9</a><span class=omit>...</span><a href=?page=5245>5245</a><a href=?page=5246>5246</a><a href=?page=2>后一页</a>
+                </div>
+                <div style="float:left;margin-top:10px;">
+                    <form action="" method="GET">穿越到 <input type="text" name="page" style="width:30px;height:16px;" /> 页 <input type="submit" value="走~" /> </form></div>
+                <div style="float:left;width:100%;margin-top:10px;">
+                    <script type="text/javascript">
+                        /*468*15，创建于2012-8-1*/
+                        var cpro_id = "u1007168";
+                        </script>
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+            </div>
+            <!-- left end -->
+            <div id="wrap_right">
+                <div class="box_one">
+                    <script type="text/javascript">/*300*250，创建于2012-6-22*/ var cpro_id = 'u953846';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+                <div class="box_one">
+                    <div id="right_menu_box">
+                        <ul>
+                            <li><a href="/" class="now"><b>全部</b></a></li>
+                            <li><a href="/category/1"><b>爱情</b></a></li>
+                            <li><a href="/category/2"><b>钱</b></a></li>
+                            <li><a href="/category/3"><b>工作</b></a></li>
+                            <li><a href="/category/4"><b>家庭</b></a></li>
+                            <li><a href="/category/5"><b>学校</b></a></li>
+                            <li><a href="/category/6"><b>性</b></a></li>
+                            <li><a href="/category/7"><b>小孩</b></a></li>
+                            <li><a href="/category/8"><b>健康</b></a></li>
+                            <li><a href="/category/9"><b>杂七杂八</b></a></li>
+                            <li><a href="/people"><b>各路蛋友</b></a></li>
+                        </ul>
+                        
+                    </div>
+                    <div id="mini_ad_box"><a href="/ooxx/" title="ooxx,妹子图,美女图"><img src="/images/xjad2.jpg" alt="妹子图" /></a></div>        </div>
+                <div class="box_one">
+                    <h2>OOXX</h2>
+                    <a href="/ooxx/" title="ooxx_美女图_妹子图"><img src="http://img.caoegg.cn/a/01/66b3de17gw1dvt2h59k3zj.jpg" alt="美女图" width="300" /></a>
+                    <div class="cz_infoline"><span class="voteyes" id="voteyes131161re"><a href="javascript:void(0)" onclick="vote_picture_yes('131161','1', 're');">OO</a> <font color="#aaaaaa">(1)</font></span>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="voteno" id="voteno131161re"><a href="javascript:void(0)" onclick="vote_picture_no('131161','2', 're');">XX</a> <font color="#aaaaaa">(2)</font></span></div>
+                </div>
+                <div class="box_one">
+                    <h2>人品排行榜</h2>
+                    <div class="pic_frame"><a href="/people/6331" title="各种蛋 (草蛋仔)"><img src="/avatars/20110111/4d2c2eaf3d03a.jpg" width="53" height="53" alt="各种蛋 " /></a></div>
+                    <div class="pic_frame"><a href="/people/37470" title="如鱼饮水(草蛋妹)"><img src="/images/list_m.gif" width="53" alt="如鱼饮水" /></a></div>
+                    <div class="pic_frame"><a href="/people/22112" title="滚滚滚(草蛋妹)"><img src="/images/list_m.gif" width="53" alt="滚滚滚" /></a></div>
+                    <div class="pic_frame"><a href="/people/39299" title="打打人，练练武(草蛋仔)"><img src="/avatars/20111130/4ed5f5b84c9da.jpg" width="53" height="53" alt="打打人，练练武" /></a></div>
+                    <div class="pic_frame"><a href="/people/7696" title="Slz(火星草蛋者)"><img src="/avatars/20120202/4f2aac26a6244.jpg" width="53" height="53" alt="Slz" /></a></div>
+                    <div class="pic_frame"><a href="/people/17187" title="香妞萎了(草蛋仔)"><img src="/avatars/20101221/4d106ed82cee6.jpg" width="53" height="53" alt="香妞萎了" /></a></div>
+                    <div class="pic_frame"><a href="/people/21696" title="顺其自燃(草蛋仔)"><img src="/avatars/20120222/4f4467817e29c.jpg" width="53" height="53" alt="顺其自燃" /></a></div>
+                    <div class="pic_frame"><a href="/people/39986" title="板牙小姐(草蛋妹)"><img src="/avatars/20120613/4fd7e3d1ab517.jpg" width="53" height="53" alt="板牙小姐" /></a></div>
+                    <div class="pic_frame"><a href="/people/23128" title="北京土著(草蛋仔)"><img src="/avatars/20110101/4d1e4b9580311.jpg" width="53" height="53" alt="北京土著" /></a></div>
+                    <div class="pic_frame"><a href="/people/47652" title="操你妹(草蛋妹)"><img src="/avatars/20121004/506d5ec11153c.JPG" width="53" height="53" alt="操你妹" /></a></div>
+                    <div class="pic_frame"><a href="/people/19639" title="小手冰凉(草蛋妹)"><img src="/images/list_m.gif" width="53" alt="小手冰凉" /></a></div>
+                    <div class="pic_frame"><a href="/people/12966" title="慵懒的猪(草蛋仔)"><img src="/images/list_m.gif" width="53" alt="慵懒的猪" /></a></div>
+                    <div class="pic_frame"><a href="/people/24489" title="媳妇手凉(草蛋仔)"><img src="/images/list_m.gif" width="53" alt="媳妇手凉" /></a></div>
+                    <div class="pic_frame"><a href="/people/31563" title="坑爹来了(草蛋仔)"><img src="/images/list_m.gif" width="53" alt="坑爹来了" /></a></div>
+                    <div class="pic_frame"><a href="/people/24830" title="不拘一格降人品(草蛋妹)"><img src="/images/list_m.gif" width="53" alt="不拘一格降人品" /></a></div>
+                    <div class="pic_frame"><a href="/people/30585" title="wfdcd(草蛋仔)"><img src="/avatars/20110615/4df8b6e867032.jpg" width="53" height="53" alt="wfdcd" /></a></div>
+                    <div class="pic_frame"><a href="/people/22008" title="猪二妞的二叔(草蛋仔)"><img src="/avatars/20110225/4d67ae26540dc.jpg" width="53" height="53" alt="猪二妞的二叔" /></a></div>
+                    <div class="pic_frame"><a href="/people/22197" title="宝笨(草蛋妹)"><img src="/avatars/20110608/4def977d82f88.jpg" width="53" height="53" alt="宝笨" /></a></div>
+                    <div class="pic_frame"><a href="/people/27508" title="咱不追求高调(草蛋仔)"><img src="/avatars/20120215/4f3a88670d34b.jpg" width="53" height="53" alt="咱不追求高调" /></a></div>
+                    <div class="pic_frame"><a href="/people/27647" title="妞儿(草蛋妹)"><img src="/avatars/20120306/4f55d4a0e6e81.jpg" width="53" height="53" alt="妞儿" /></a></div>
+                    <div class="pic_frame"><a href="/people/18587" title="神经猫(火星草蛋者)"><img src="/images/list_m.gif" width="53" alt="神经猫" /></a></div>
+                    <div class="pic_frame"><a href="/people/11851" title="西瓜新纪元(草蛋仔)"><img src="/avatars/20111205/4edc361e60bd5.jpg" width="53" height="53" alt="西瓜新纪元" /></a></div>
+                    <div class="pic_frame"><a href="/people/15047" title="男男有爱(火星草蛋者)"><img src="/avatars/20110120/4d3788be96434.jpg" width="53" height="53" alt="男男有爱" /></a></div>
+                    <div class="pic_frame"><a href="/people/25777" title="啊哈(火星草蛋者)"><img src="/images/list_m.gif" width="53" alt="啊哈" /></a></div>
+                    <div class="pic_frame"><a href="/people/33299" title="小石头~(草蛋仔)"><img src="/avatars/20111028/4eaa20301b22d.jpg" width="53" height="53" alt="小石头~" /></a></div>
+                    <div class="pic_frame"><a href="/people/30822" title="就爱千岛酱(草蛋妹)"><img src="/avatars/20120327/4f71a862971d2.jpg" width="53" height="53" alt="就爱千岛酱" /></a></div>
+                    <div class="pic_frame"><a href="/people/20061" title="犀利的一B(草蛋仔)"><img src="/images/list_m.gif" width="53" alt="犀利的一B" /></a></div>
+                    <div class="pic_frame"><a href="/people/15601" title="草咸蛋(草蛋仔)"><img src="/avatars/20110514/4dce107feaba9.jpg" width="53" height="53" alt="草咸蛋" /></a></div>
+                    <div class="pic_frame"><a href="/people/33812" title="时光倒流二十年(草蛋妹)"><img src="/avatars/20110619/4dfdf07d4250c.jpg" width="53" height="53" alt="时光倒流二十年" /></a></div>
+                    <div class="pic_frame"><a href="/people/29170" title="极乐老僧(草蛋仔)"><img src="/avatars/20110314/4d7dcdeee3914.gif" width="53" height="53" alt="极乐老僧" /></a></div>
+                </div>
+                <div class="box_one new_comments">
+                    <h2>标签</h2>
+                    <a href="/tag/167" class="tag">爱情</a><a href="/tag/64" class="tag">性</a><a href="/tag/132" class="tag">工作</a><a href="/tag/30" class="tag"></a><a href="/tag/79" class="tag">杂七杂八</a><a href="/tag/23" class="tag">学校</a><a href="/tag/197" class="tag">a</a><a href="/tag/198" class="tag">fucking</a><a href="/tag/196" class="tag">What</a><a href="/tag/277" class="tag">人品</a><a href="/tag/148" class="tag">钱</a><a href="/tag/177" class="tag">操蛋</a><a href="/tag/15" class="tag">生活</a><a href="/tag/204" class="tag">草蛋</a><a href="/tag/179" class="tag">家庭</a><a href="/tag/254" class="tag">健康</a><a href="/tag/240" class="tag">求保佑</a><a href="/tag/189" class="tag">郁闷</a><a href="/tag/62" class="tag">考试</a><a href="/tag/339" class="tag">求人品</a>        </div>
+                <div class="box_one fixed_box">
+                    <script type="text/javascript">/*300*250，创建于2012-6-22*/ var cpro_id = 'u953846';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+            </div>
+            
+            <div class="clear"></div>
+        </div>
+        <div style="margin:auto; margin-top:20px;width:1000px;" id="links">
+            <div style="float:left; width:1000px; padding:10px 10px 0 0; line-height:20px; font-size:12px;">友情链接: <a href="http://www.bling0.com/" target="_blank">博聆网</a> | <a href="http://www.easywayschina.com" target="_blank">益思研发管理咨询</a> | <a href="http://www.ipadown.com" target="_blank">苹果I派党</a> | <a href="http://home.suzhou.soufun.com/" target="_blank">苏州搜房家居网</a> | <a href="http://www.huxigd.com" target="_blank">单县新闻</a> | <a href="http://www.iqsuperman.net" target="_blank">IQ超人</a>  | <a href="http://www.letuwang.com/jiaju" target="_blank">创意家居</a> | <a href="http://www.51lunwen.net" target="_blank">无忧论文网</a> | <a href="http://www.xinli001.com/" target="_blank">心理学</a> | <a href="http://www.my7475.com" target="_blank">奇事奇物网</a> | <a href="http://www.ozsunny.com" target="_blank">澳洲光线网</a> | <a href="http://www.shushao.com/" target="_blank">树梢网</a> | <a href="http://www.lansin.com" target="_blank">蓝心心理网</a>  | <a href="http://www.hotds.com" target="_blank">直销网</a> 友情链接事宜请发邮件至hello#caoegg.cn （#替换为@）</div>
+            <div class="clear"></div>
+        </div>
+        <div id="footer_wrap">
+            <div id="footer">
+                <ul>
+                    <li class="f"><a href="http://www.caoegg.cn">草蛋网</a> &copy; 2009-2013<br /><b>手机访问：wap.caoegg.cn</b></li>
+                    <li><a href="/about">关于草蛋网</a></li>
+                    <li><a href="/help">常见问题</a></li>
+                    <li><a href="/ad">广告合作</a></li>
+                    <li><a href="#">隐私声明</a></li>
+                    <li><a href="http://www.fckex.com/" title="我的前任是极品" target="_blank">我的前任是极品</a></li>
+                    <li><a href="http://feed.feedsky.com/caoegg" target="_blank" title="订阅草蛋网"><img src="/images/feed.gif" /></a></li>
+                    <li class="f" style="margin-left:30px;"><a href="http://www.miibeian.gov.cn/">渝ICP备10004485号</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div style="display:none"><script src="http://s13.cnzz.com/stat.php?id=4522643&web_id=4522643" language="JavaScript"></script></div></body>
+</html>
